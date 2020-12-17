@@ -1,8 +1,5 @@
 # Giphy Search and Favorites
 
-This week you will be building a Giphy searching and favoriting application which allows the user to save images and sort them into categories.
-
-In this project you will need to utilize React, Redux, Sagas and integrate them with a 3rd party API....all in a group project!
 
 ## Team Setup
 [x] Do not clone this repository. Instead, have one person use the template and make a copy. Make your team collaborators. Have them clone directly from the person who did the setup, not fork.
