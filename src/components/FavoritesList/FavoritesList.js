@@ -4,7 +4,8 @@ import FavoritesListItem from "../FavoritesListItem/FavoritesListItem";
 
 class FavoritesList extends Component {
   componentDidMount() {
-     this.props.dispatch({type: 'FETCH_FAVORITES'});
+    this.props.dispatch({type: 'FETCH_FAVORITES'});
+    console.log ('in mount');
   }
 
   clickHandler = () => {
@@ -16,8 +17,9 @@ class FavoritesList extends Component {
       <div className="favoritesList">
         <h2>Your Selected Favorites</h2>
         <ul>
+          {/* {JSON.stringify(this.props.reduxStore.favoritesList)} */}
           {this.props.reduxStore.favoritesList.map((favorite, index) => {
-            return <FavoriteListItem key={index} favorite={favorite} />;
+            return <FavoritesListItem key={index} favorite={favorite} />;
           })}
         </ul>
         <button onClick={this.clickHandler}>Refresh Page</button>

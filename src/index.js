@@ -11,34 +11,41 @@ import createSagaMiddleware from 'redux-saga';
 import { takeEvery, put } from 'redux-saga/effects';
 
 function* watcherSaga() { 
-    yield takeEvery('FETCH_FAVORITES', favoritesList );
+    yield takeEvery('FETCH_FAVORITES', getFavorites );
 }
 
-function* favoritesList() {
+const favoritesList = (state = [], action) => {
+    if( action.type === 'GRAB_FAVORITES'){
+        return action.payload
+    }
+    return state
+}
+
+
+function* getFavorites() {
     console.log('In favoritesList');
-    
     try {
         const response = yield axios.get('/api/favorite');
         yield put({ type:'GRAB_FAVORITES',  payload: response.data})
     }catch ( error ) {
-    console.log('error with get request', error);
+        console.log('error with get request', error);
     }
 }
 
 
 const sagaMiddleware = createSagaMiddleware();
 
-const store = createStore(
+const storeInstance = createStore(
     combineReducers({ 
         favoritesList,
-
      }),
     applyMiddleware(sagaMiddleware, logger),
   );
 
   sagaMiddleware.run(watcherSaga);
 
-ReactDOM.render(<App />, document.getElementById('react-root'));
+  ReactDOM.render(<Provider store={storeInstance}><App /></Provider>, document.getElementById('react-root'));
+// ReactDOM.render(<App />, document.getElementById('react-root'));
 
 
 
