@@ -20,10 +20,14 @@ app.use('/api/favorite', favoriteRouter);
 app.use('/api/category', categoryRouter);
 
 //get all images from search
-app.get('/api/search', (req,res) => {
+app.get('/api/search/:result', (req,res) => {
+  let result = req.params.result
+  console.log(result);
+
   let giphyKey = process.env.GIPHY_API_KEY;
-  console.log('Got key?', giphyKey);
-  axios.get(`http://api.giphy.com/v1/gifs/search?api_key=${giphyKey}`)
+  // console.log('Got key?', giphyKey);
+  axios.get(`http://api.giphy.com/v1/gifs/search?api_key=${giphyKey}&q=${result}&limit=12`)
+  
 .then(response => {
   res.send(response.data.data)
 }).catch(error => {
@@ -31,7 +35,6 @@ app.get('/api/search', (req,res) => {
   res.sendStatus(500);
   })
 })
-
 
 // App Set //
 const PORT = process.env.PORT || 5000;
