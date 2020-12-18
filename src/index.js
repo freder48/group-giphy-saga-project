@@ -48,7 +48,7 @@ function* deleteFavoriteItem(action) {
     if( action.type === 'DELETE' ){
         try{
             axios.delete(`/api/favorite/${action.payload}`)
-            // yield put({ type: 'FETCH_FAVORITES'})
+            yield put({ type: 'FETCH_FAVORITES'})
         } catch ( error ) {
             console.log('error with the delete request');
         }    
