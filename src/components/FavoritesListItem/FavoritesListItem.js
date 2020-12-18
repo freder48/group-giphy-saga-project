@@ -39,7 +39,7 @@ class FavoritesListItem extends Component {
     render() {
 
         return (
-            <div className="card">
+            <div className="display card">
                 <img height="150px" className="pictureClass" src={this.props.favorite.url} alt={this.props.favorite.title}/>
                 <h3>{this.props.favorite.title}</h3>
                 {/* {JSON.stringify(this.props.favorite.id)} */}

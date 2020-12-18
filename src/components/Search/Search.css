@@ -9,10 +9,11 @@
     padding: 1em;
     margin-right: 1rem;
     margin-bottom: 1rem;
+    background-color: rgb(167, 167, 132); 
   }
 
   .display {
-    width: 25%;
+    width: 20%;
     float: left;
     overflow: hidden;
     margin-top: 2em;

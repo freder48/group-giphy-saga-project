@@ -31,7 +31,7 @@ class FavoritesList extends Component {
         <h2>Your Selected Favorites</h2>
 
           <p>&nbsp;</p>
-            <label>Choose a Category:</label>
+            <label className="space">Choose a Category:</label>
             <select id="rating" name="rating" onChange={(event)=>this.handleNameChange(event)}>
                 <option value="All">All</option>
                 <option value="Funny">Funny</option>
@@ -51,7 +51,7 @@ class FavoritesList extends Component {
             return <FavoritesListItem key={index} favorite={favorite} />;
           })}
         </ul>
-        <button onClick={this.clickHandler}>Refresh Page</button>
+        
       </div>
     );
   }
