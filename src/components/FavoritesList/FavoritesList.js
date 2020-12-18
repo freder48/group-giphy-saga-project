@@ -17,7 +17,7 @@ class FavoritesList extends Component {
   clickHandler = () => {
     this.props.dispatch({type: 'FETCH_FAVORITES'});
   };
- 
+  
   handleNameChange = (event) => {
     console.log('event happended')
     this.setState({
