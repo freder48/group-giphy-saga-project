@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import Search from '../Search/Search'
 import { HashRouter as Router, Route, Link } from 'react-router-dom'; 
 import FavoritesList from '../FavoritesList/FavoritesList';
+import './App.css';
 
 class App extends Component {
 
   render() {
     return (
-      <div>
-        <h1>Giphy Search!</h1>
+      <div className="App">
+        <h1 className="header">Giphy Search!</h1>
         <Router>
         <nav>
           <ul>
