@@ -52,6 +52,7 @@ class Search extends Component {
                             <br></br>
                             <label htmlFor="category">Category:</label>
                             <select name="category" id="category" onChange={this.selectCategory}>
+                                <option>Select</option>
                                 <option value="1">Funny</option>
                                 <option value="2">Cohort</option>
                                 <option value="3">Cartoon</option>
