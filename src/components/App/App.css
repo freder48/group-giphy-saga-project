@@ -1,0 +1,20 @@
+nav li {
+    list-style: none;
+    display: inline-block;
+    margin: 2em;
+}
+
+nav li a {
+    text-decoration: none;
+}
+
+.App {
+    text-align: center;
+}
+
+.header {
+    background-color: rgb(77, 80, 82);
+    color: white;
+    height: 4em;
+    padding-top: 2.8em;
+}

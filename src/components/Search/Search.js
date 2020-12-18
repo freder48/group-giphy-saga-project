@@ -1,22 +1,25 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import './Search.css'
 
 class Search extends Component {
 
     state = {
         search: '',
-        // giphy: {
-        //     giphy_id: '',
-        //     title: '',
-        //     url: '',
-        //     category_id: ''
-        // }
+        selectValue: '',
     }
 
     handleChange = (event) => {
         console.log('event happened', event.target.value);
         this.setState({
             search: event.target.value,
+        });
+    }
+
+    selectCategory = (event) => {
+        console.log('event happened - category', event.target.value);
+        this.setState({
+            selectValue: event.target.value,
         });
     }
 
@@ -27,43 +30,35 @@ class Search extends Component {
         });
     }
 
-    // setFavorite = (event) => {
-    //     console.log('setEvent', event.target);
-
-    //     this.setState({
-    //         giphy: {
-    //             giphy_id: `${this.props.reduxState.searchResults.id}`,
-    //             // title: giphy.title,
-    //             // url: giphy.images.fixed_width.url,
-    //             // category_id: 1
-    //         }
-    //     })
-    //     console.log('in setFavorite', this.state.giphy);
-    //     this.addFavorite(this.state.giphy);
-    // }
-
-    // addFavorite = (giphy) => {
-    //     console.log('search send', giphy);
-    //     this.props.dispatch({ type: 'ADD_FAVORITE', payload: giphy})
-    // }
 
     render() {
         return (
             <div>
                 <h1>Search!</h1>
                 <section>
-                    <label>Search</label>
-                    <input type="text" value={this.state.search} onChange={this.handleChange} />
-                    <button onClick={this.searchGiphy}>Submit</button>
+                    <label className="space">Search: </label>
+                    <input className="space" type="text" value={this.state.search} onChange={this.handleChange} />
+                    <button className="space" onClick={this.searchGiphy}>Submit</button>
                 </section>
 
                 <section>
-                    <h2>Search Results</h2>
+
                     {/* {JSON.stringify(this.props.reduxState.searchResults)} */}
                     {this.props.reduxState.searchResults.map(giphy =>
-                        <p key={giphy.id}>
+                        <div className="display card" key={giphy.id}>
 
-                            <img alt={giphy.title} src={giphy.images.fixed_width.url} />
+                            <img height="150px" alt={giphy.title} src={giphy.images.fixed_width.url} />
+                            <br></br>
+                            <br></br>
+                            <label htmlFor="category">Category:</label>
+                            <select name="category" id="category" onChange={this.selectCategory}>
+                                <option value="1">Funny</option>
+                                <option value="2">Cohort</option>
+                                <option value="3">Cartoon</option>
+                                <option value="4">NSFW</option>
+                                <option value="5">Meme</option>
+                            </select>
+                            <br></br>
                             <br></br>
                             <button onClick={() => this.props.dispatch({
                                 type: 'ADD_FAVORITE',
@@ -71,20 +66,11 @@ class Search extends Component {
                                     giphy_id: giphy.id,
                                     title: giphy.title,
                                     url: giphy.images.fixed_width.url,
-                                    category_id: 1
+                                    category_id: this.state.selectValue,
                                 }
                             })}>
                                 Favorite</button>
-                                <br></br>
-                            <label htmlFor="category">Category:</label>
-                            <select name="category" id="category">
-                                <option value="funny">Funny</option>
-                                <option value="cohort">Cohort</option>
-                                <option value="cartoon">Cartoon</option>
-                                <option value="nsfw">NSFW</option>
-                                <option value="meme">Meme</option>
-                            </select>
-                        </p>)}
+                        </div>)}
                 </section>
             </div>
         );
