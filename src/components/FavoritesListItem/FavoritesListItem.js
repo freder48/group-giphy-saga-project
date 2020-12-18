@@ -9,13 +9,8 @@ class FavoritesListItem extends Component {
         showAdd: true,
         local: ''
     }
+
  
-    // togglAddRemove = () => {
-    //     this.setState({
-    //         showAdd: !this.state.showAdd // flip the boolean using ! NOT
-    //     })
-    //     this.addPizza()
-    // }
 
     // addPizza = () => {
     //     if (this.state.showAdd === true) {
@@ -29,6 +24,14 @@ class FavoritesListItem extends Component {
     //     }
     // }
 
+
+    delete = (event, passedId) => {
+        this.props.dispatch({type: 'DELETE', payload: passedId});
+        this.props.dispatch({type: 'FETCH_FAVORITES'});
+    }
+
+   
+
     sendToStore = () => {
         
     }
@@ -37,11 +40,10 @@ class FavoritesListItem extends Component {
 
         return (
             <div className="card">
-                <img height="150px" src={this.props.favorite.url} alt={this.props.favorite.title}/>
-                <h2>{this.props.favorite.title}</h2>
-                <button onClick={this.togglAddRemove}>
-                    {this.state.showAdd ? `Remove From Favorite!` : `Remove From NOT Favorite!`}
-                </button>
+                <img height="150px" className="pictureClass" src={this.props.favorite.url} alt={this.props.favorite.title}/>
+                <h3>{this.props.favorite.title}</h3>
+                {/* {JSON.stringify(this.props.favorite.id)} */}
+                <button onClick={(event)=>this.delete(event,this.props.favorite.id ) }>Delete Giphy</button>
             </div>
         )
     }
