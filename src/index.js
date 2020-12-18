@@ -12,6 +12,27 @@ import { takeEvery, put } from 'redux-saga/effects';
 
 function* watcherSaga() { 
     yield takeEvery('FETCH_FAVORITES', getFavorites );
+    // yield takeEvery('FETCH_FAVORITES', favoritesList );
+    yield takeEvery('SEARCH_GIPHY', getSearch);
+    yield takeEvery('ADD_FAVORITE', addFavorite);
+}
+
+function* addFavorite( action ) {
+    console.log('index post', action.payload);
+    try { 
+        yield axios.post('/api/favorite', action.payload)
+        yield put({ type: 'FETCH_FAVORITES' }) 
+    } catch (error) {
+        console.log('error with add favorite request', error);
+    }
+}
+
+const searchResults = (state = [], action) => {
+    if(action.type === 'SET_RESULTS') {
+        console.log('in searchResults reducer', action.payload);
+        return action.payload;
+    } 
+    return state;
 }
 
 const favoritesList = (state = [], action) => {
@@ -27,8 +48,19 @@ function* getFavorites() {
     try {
         const response = yield axios.get('/api/favorite');
         yield put({ type:'GRAB_FAVORITES',  payload: response.data})
-    }catch ( error ) {
-        console.log('error with get request', error);
+    } catch ( error ) {
+    console.log('error with get request', error);
+    }
+}
+
+function* getSearch(action) {
+    console.log('In getSearch');
+    
+    try {
+        const response = yield axios.get(`/api/search/${action.payload}`);
+        yield put({ type:'SET_RESULTS',  payload: response.data})
+    } catch ( error ) {
+    console.log('error with SEARCH GET request', error);
     }
 }
 
@@ -38,6 +70,8 @@ const sagaMiddleware = createSagaMiddleware();
 const storeInstance = createStore(
     combineReducers({ 
         favoritesList,
+        searchResults,
+
      }),
     applyMiddleware(sagaMiddleware, logger),
   );
